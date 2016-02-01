@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.learning.refapp</groupId>
+    <artifactId>ReferenceAppPOM</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.learning.refapp.web</groupId>
+  <artifactId>ReferenceAppWeb</artifactId>
+  <packaging>war</packaging>
+  <name>ReferenceAppWeb Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <build>
+    <finalName>ReferenceAppWeb</finalName>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.learning.refapp.business</groupId>
+  		<artifactId>ReferenceAppBusiness</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+</project>
