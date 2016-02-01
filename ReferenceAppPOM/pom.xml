@@ -5,6 +5,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
+	<description>
+		Reference Application POM
+	</description>
+	
 	<modules>
 		<module>ReferenceAppWeb</module>
 		<module>ReferenceAppBusiness</module>
