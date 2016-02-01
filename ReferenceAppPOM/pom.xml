@@ -38,7 +38,6 @@
 		</dependency>
 
 		<!-- Unit Testing Dependencies -->
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -53,7 +52,6 @@
 		</dependency>
 
 		<!-- Spring Dependencies -->
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
