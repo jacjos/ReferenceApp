@@ -53,3 +53,17 @@ Now that the basic project structure is created, lets add it to the SCM of choic
 [[https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/12_GIT_Remote_Push.png | alt=12_GIT_Remote_Push ]]
 3. Select HEAD as the source ref and master[branch] as the Destination ref. Click on "Add Spec". Make sure, "Force Update" is selected and click Next and then click on Finish.  
 [[https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/13_GIT_Remote_Push_Specs.png | alt=13_GIT_Remote_Push_Specs ]]
+
+**Stage 4 : Configure Pull (Enable 2 way Sync)**
+
+This is based on [this StackOverflow comment](http://stackoverflow.com/questions/8756006/eclipse-egit-push-to-remote-menu-choice-is-grayed-out/10662106#10662106)
+
+1. In Eclipse, open Git Perspective
+2. Go to the correct repo (ReferenceApp in this example) --> Remotes.
+3. Right click and "Create Remote"
+4. Enter "origin" as remote name and click change.
+5. Enter the GitHub repo details & save. Push default details are now saved.
+6. To configure pull (from GitHub repo to local repo), right click on Remotes and select "Configure Fetch".
+7. Provide the details of remote refs to pull from.
+
+Now you will be able to Sync your workspace with GitHub repository as well (Team --> Synchronize Workspace)
