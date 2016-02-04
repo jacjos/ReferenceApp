@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Referenceapp by jacjos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Referenceapp</h1>
+      <h2 class="project-tagline">Reference (learning) application for Maven (multi modules), Spring MVC</h2>
+      <a href="https://github.com/jacjos/ReferenceApp" class="btn">View on GitHub</a>
+      <a href="https://github.com/jacjos/ReferenceApp/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jacjos/ReferenceApp/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>Below are the tools used in the below step by step guide</p>
+
+<ul>
+<li>Eclipse (Luna)</li>
+<li>m2e - Maven Integration for Eclipse (comes with Luna distribution)</li>
+<li>Eclipse EGit plugin - For integration with Git and GitHub</li>
+<li>Spring IDE plugin</li>
+</ul>
+
+<p>Also note that </p>
+
+<ul>
+<li>I had not installed GIT separately (other than the EGit eclipse plugin) and hence the git commands were not available through windows command line.</li>
+<li>Java version used was 1.7 (for those who are curious about that)</li>
+</ul>
+
+<p>With that, here is the <strong><em>Step by Step Guide</em></strong></p>
+
+<p>Note: Please read the [[2. Alternate Project Setup]] for a slightly easier/better method for setting up dependent modules, specifically for Spring.</p>
+
+<p><strong>Stage 1 : Creating the base project structure in Eclipse</strong></p>
+
+<ol>
+<li>Open Eclipse. Select your Eclipse Workspace - D:/LunaWorkspace in this example</li>
+<li>Create the base Maven project (POM Project) - Right click on eclipse Project Explorer --&gt;  New --&gt; Other --&gt; Maven Project</li>
+<li>Here I am choosing a location outside my eclipse workspace - "D:\LunaProjects\ReferenceApp\ReferenceAppPOM". Make sure "Create a simple project (skip archetype selection) check box is selected. Click Next.
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/1_NewMavenProject_Location.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/1_NewMavenProject_Location.png</a> | alt=1_NewMavenProject_Location]]</li>
+<li>On the next screen, enter the artifact details of the POM project. Make sure to select the packaging as "POM"
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/2_NewMavenProject_ArtifactDetails.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/2_NewMavenProject_ArtifactDetails.png</a> | alt=2_NewMavenProject_ArtifactDetails ]]</li>
+<li>Click finish.</li>
+<li>Lets create a maven module for the parent project we just created. Right click on the newly created Parent POM project - ReferenceAppPOM and select New --&gt; Other --&gt; Maven Module</li>
+<li>Provide the Module Name you would want to use (ReferenceAppWeb in this example). Make sure that the Parent Project is correctly listed as ReferenceAppPOM. Click Next<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/3_NewMavenModule_Name.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/3_NewMavenModule_Name.png</a> | alt=3_NewMavenModule_Name ]]</li>
+<li>Select 'maven-archetype-webapp' as the archetype to use and click next.
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/4_NewMavenModule_Archetype.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/4_NewMavenModule_Archetype.png</a> | alt=4_NewMavenModule_Archetype ]]</li>
+<li>Provide the rest of the artifact details and click Finish
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/5_NewMavenModule_Artifact.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/5_NewMavenModule_Artifact.png</a> | alt=5_NewMavenModule_Artifact ]]</li>
+<li>Right click on the created Web project (maven module) and check the right compiler settings are selected. In my case I had to manullay correct the Java version and runtimes from the "Project Facets". Also if you get a warning "Version is duplicate of parent version" for your pom.xml, you may safely remove the version definition inside the pom file and the module will inherit the parent pom project's version number.<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/6_NewMavenModule_ProjectFacets.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/6_NewMavenModule_ProjectFacets.png</a> | alt=6_NewMavenModule_ProjectFacets ]]</li>
+<li>Lets create one more java project (maven module) which the Web project would be depending on. Right click on the parent POM project, New --&gt; Other --&gt; Maven Module. Follow the prompts. This time we can choose "maven-archetype-quickstart". Once all details are entered (ref screenshot), click finish and we can see the new module (ReferenceAppBusiness in this example) in eclipse Project Explorer<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/7_NewMavenModule_UtilityModule.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/7_NewMavenModule_UtilityModule.png</a> | alt=7_NewMavenModule_UtilityModule ]]</li>
+<li>To add ReferenceAppBusiness module as a dependency for the ReferenceAppWeb module, open the pom.xml of ReferenceAppWeb and added the ReferenceAppBusiness as a dependency. Make sure to use the correct artifact details of ReferenceAppBusiness, while adding it as a dependency.<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/8_Module_Dependency.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/8_Module_Dependency.png</a> | alt=8_Module_Dependency ]]</li>
+<li>At this point the basic structure of Reference Application is created. If you go to the file system, you can see that the 2 modules are placed inside the Parent Maven (POM) Project. However in eclipse Project Explorer view, you can see that the Modules are flattened out and can been seen at the same level as that of the Parent POM project. Also, if you expand the POM project you can see both the modules also appearing there as well. Dont worry, its not a copy, but the same source files/folders displayed in a convenient way by eclipse.<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/9_FileSystem_Before_Git.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/9_FileSystem_Before_Git.png</a> | alt=9_FileSystem_Before_Git ]]</li>
+</ol>
+
+<p><strong>Stage 2 : Adding the Project and modules to local Git Repository</strong></p>
+
+<p>Now that the basic project structure is created, lets add it to the SCM of choice - GIT in this case. Keep in mind that at this stage we are adding it to a GIT repository on your local disk. (Remember GIT is a DVCS - Distributed Version Control System)</p>
+
+<ol>
+<li>In Eclipse Project Explorer, select all 3 Projects/Modules created (ctrl+click). Right Click --&gt; Team --&gt; Share --&gt; Git. On this screen select the checkbox which says "Use or create repository in parent folder of project". Now, in the text box for the location of the Git repository, make sure that the parent folder where your POM project resides, is selected ("D:\LunaProjects\ReferenceApp\" in this example)<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/10_GIT_Create_Local.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/10_GIT_Create_Local.png</a> | alt=10_GIT_Create_Local ]]</li>
+<li>Click on "Create Repository button. A .git directory gets created in the file system, at the selected location. Click on the Finish  button.</li>
+<li>At this stage the Git repository has been created and the projects/module have been linked/staged. You would be seeing a decorator suffix with each module/project name in Eclipse Project Explorer view indicating that it has been linked to the repo. To Commit the files, right click on the projects/modules --&gt; Team --&gt; Commit. Provide a commit message. Make sure to select all the files you would like to commit (or use the select all check box present). Click on Commit or Refer to Stage 3 below.<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/11_GIT_Commit.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/11_GIT_Commit.png</a> | alt=11_GIT_Commit ]]</li>
+</ol>
+
+<p><strong>Stage 3 : Adding the files to GitHub</strong></p>
+
+<ol>
+<li>Create a GitHub Repository - ReferenceApp in this example. Copy the repository URL to the clipboard</li>
+<li>At step# 3 of Stage 2 above, instead of clicking on Commit button, Click on "Commit &amp; Push". You will be prompted to enter the remote repo details. Since you had copied the GitHub Repo URL, it would automatically pre-fill the repo details. Enter the GitHub account details. Click on Next<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/12_GIT_Remote_Push.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/12_GIT_Remote_Push.png</a> | alt=12_GIT_Remote_Push ]]</li>
+<li>Select HEAD as the source ref and master[branch] as the Destination ref. Click on "Add Spec". Make sure, "Force Update" is selected and click Next and then click on Finish.<br>
+[[<a href="https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/13_GIT_Remote_Push_Specs.png">https://github.com/jacjos/ReferenceApp/blob/master/ReferenceAppPOM/Guide/Images/13_GIT_Remote_Push_Specs.png</a> | alt=13_GIT_Remote_Push_Specs ]]</li>
+</ol>
+
+<p><strong>Stage 4 : Configure Pull (Enable 2 way Sync)</strong></p>
+
+<p>This is based on <a href="http://stackoverflow.com/questions/8756006/eclipse-egit-push-to-remote-menu-choice-is-grayed-out/10662106#10662106">this StackOverflow comment</a></p>
+
+<ol>
+<li>In Eclipse, open Git Perspective</li>
+<li>Go to the correct repo (ReferenceApp in this example) --&gt; Remotes.</li>
+<li>Right click and "Create Remote"</li>
+<li>Enter "origin" as remote name and click change.</li>
+<li>Enter the GitHub repo details &amp; save. Push default details are now saved.</li>
+<li>To configure pull (from GitHub repo to local repo), right click on Remotes and select "Configure Fetch".</li>
+<li>Provide the details of remote refs to pull from.</li>
+</ol>
+
+<p>Now you will be able to Sync your workspace with GitHub repository as well (Team --&gt; Synchronize Workspace)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jacjos/ReferenceApp">Referenceapp</a> is maintained by <a href="https://github.com/jacjos">jacjos</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
