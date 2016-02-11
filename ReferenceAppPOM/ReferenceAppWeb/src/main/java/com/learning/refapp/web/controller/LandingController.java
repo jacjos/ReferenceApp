@@ -30,5 +30,13 @@ public class LandingController {
 		ModelAndView modelView = new ModelAndView(webappConstants.view_name_bootstrap);
 		return modelView;
 	}
+	
+	@RequestMapping({"/pseudoSPA"})
+	public String loadPseudoSPA(){
+		
+		logger.debug("Inside method : {}", "loadPseudoSPA");
+		
+		return "pseudoSPA";
+	}
 
 }
