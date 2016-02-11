@@ -52,7 +52,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li id="sidebarLeftLi"><a href="#">Left Sidebar</a></li>
-							<li id="sidebarRightLi" class="active"><a href="#">Right Sidebar</a></li>
+							<li id="sidebarRightLi"><a href="#">Right Sidebar</a></li>
 						</ul>
 					</li>
 					<li id="contactLi"><a href="#">Contact</a></li>

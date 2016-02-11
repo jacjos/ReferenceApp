@@ -33,8 +33,21 @@ jQuery(document).ready(function($) {
 		
 		event.preventDefault();
 		displayFragment("about");
+	});	
+	
+	$("#sidebarLeftLi").click(function(event){
+		
+		event.preventDefault();
+		displayFragment("sidebarLeft");
+		
 	});
 	
+	$("#sidebarRightLi").click(function(event){
+		
+		event.preventDefault();
+		displayFragment("sidebarRight");
+		
+	});
 	
 	/*
 	 * **************************
@@ -59,6 +72,9 @@ jQuery(document).ready(function($) {
 		resetFragment("home");
 		resetFragment("contact");
 		resetFragment("about");
+		resetFragment("sidebarLeft");
+		resetFragment("sidebarRight");
+		
 	}
 	
 	function resetFragment(fragmentName){
